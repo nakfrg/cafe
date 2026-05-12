@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Table — Bow Wow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cloud: #F6F8FB;
+    --cream: #FBF7E8;
+    --sand:  #E2D5B1;
+    --bark:  #494238;
+    --bark-soft: rgba(73, 66, 56, 0.6);
+    --bark-faint: rgba(73, 66, 56, 0.15);
+    --bark-fainter: rgba(73, 66, 56, 0.08);
+    --moss:  #8C9A6E;  /* muted green for floor */
+    --rust:  #B86954;  /* warm rust for seat-selected accent */
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--bark);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  /* ─── Top bar (matches menu page) ─────────────────────── */
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    z-index: 50;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--bark-faint);
+  }
+
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--bark);
+    font-variation-settings: "opsz" 144;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .wordmark svg {
+    width: 28px;
+    height: 28px;
+    color: var(--bark);
+    flex-shrink: 0;
+  }
+  .wordmark span { font-style: italic; font-weight: 300; }
+
+  .back-link {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--bark);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; }
+
+  @media (max-width: 720px) {
+    .topbar { padding: 1.25rem 1.5rem; }
+  }
+
+  /* ─── Page hero ─────────────────────────────────────────── */
+
+  .booking-hero {
+    padding: 3.5rem 3rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .booking-hero .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bark-soft);
+    margin-bottom: 1rem;
+  }
+  .booking-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 144;
+  }
+  .booking-hero h1 em {
+    font-style: italic;
+    color: var(--bark-soft);
+  }
+  .booking-hero .sub {
+    margin-top: 0.9rem;
+    color: var(--bark-soft);
+    font-size: 0.85rem;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ─── Main grid layout ──────────────────────────────────── */
+
+  .booking-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 3rem 5rem;
+    display: grid;
+    grid-template-columns: minmax(320px, 380px) 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .booking-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 1.5rem 1.5rem 3rem;
+    }
+  }
+
+  /* ─── Form panel ─────────────────────────────────────────── */
+
+  .form-panel {
+    position: sticky;
+    top: 90px;
+  }
+
+  @media (max-width: 900px) {
+    .form-panel { position: static; }
+  }
+
+  .form-panel h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--bark);
+  }
+
+  .field {
+    margin-bottom: 1.1rem;
+  }
+  .field label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bark-soft);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+  .field input, .field select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--bark-faint);
+    padding: 0.5rem 0;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--bark);
+    border-radius: 0;
+    transition: border-color 0.25s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-bottom-color: var(--bark);
+  }
+  .field select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23494238' stroke-width='1.2' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.4rem center;
+    padding-right: 1.5rem;
+    cursor: pointer;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .selection-summary {
+    background: var(--cream);
+    border: 1px solid var(--bark-faint);
+    border-radius: 4px;
+    padding: 0.85rem 1rem;
+    margin: 1.25rem 0;
+    font-size: 0.82rem;
+    color: var(--bark-soft);
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .selection-summary.has-selection {
+    background: var(--sand);
+    color: var(--bark);
+    border-color: var(--sand);
+  }
+  .selection-summary strong {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .submit {
+    width: 100%;
+    background: var(--bark);
+    color: var(--cream);
+    border: none;
+    padding: 0.95rem 1.5rem;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s, opacity 0.25s;
+    margin-top: 0.5rem;
+  }
+  .submit:hover:not(:disabled) {
+    background: #2f2a23;
+    transform: translateY(-2px);
+  }
+  .submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* ─── Map panel ──────────────────────────────────────────── */
+
+  .map-panel h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--bark);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .map-panel h2 .hint {
+    font-family: inherit;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bark-soft);
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.6rem 0 1rem;
+    font-size: 0.7rem;
+    color: var(--bark-soft);
+    letter-spacing: 0.05em;
+  }
+  .legend-item { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .legend-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid var(--bark-faint);
+  }
+  .legend-swatch.available { background: var(--cream); }
+  .legend-swatch.selected  { background: var(--bark); border-color: var(--bark); }
+  .legend-swatch.unavail   { background: var(--bark-fainter); }
+  .legend-swatch.taken     { background: repeating-linear-gradient(45deg, var(--bark-faint), var(--bark-faint) 2px, transparent 2px, transparent 5px); }
+
+  /* SVG map container */
+  .map-wrap {
+    background: var(--cloud);
+    border: 1px solid var(--bark-faint);
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 600 / 740;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  svg.cafe-map {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Floor + structural elements */
+  .floor    { fill: var(--cloud); }
+  .wall     { fill: none; stroke: var(--bark); stroke-width: 2; }
+
+  .bar-rect {
+    fill: var(--sand);
+    stroke: var(--bark);
+    stroke-width: 1;
+  }
+  .bar-label {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 14px;
+    fill: var(--bark);
+    text-anchor: middle;
+  }
+
+  /* Seat shapes */
+  .seat {
+    fill: var(--cream);
+    stroke: var(--bark);
+    stroke-width: 1.5;
+    cursor: pointer;
+    transition: fill 0.2s ease, transform 0.2s ease, stroke-width 0.2s ease;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .seat:hover:not(.disabled):not(.taken) {
+    fill: var(--sand);
+  }
+  .seat.selected {
+    fill: var(--bark);
+    stroke: var(--bark);
+    stroke-width: 2;
+  }
+  .seat.disabled {
+    fill: var(--bark-fainter);
+    stroke: var(--bark-faint);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .seat.taken {
+    fill: url(#hatchPattern);
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  .seat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    fill: var(--bark);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    font-weight: 500;
+    transition: fill 0.2s ease;
+  }
+  .seat-label.on-dark { fill: var(--cream); }
+  .seat-label.dim { fill: var(--bark-soft); }
+
+  .capacity-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    fill: var(--bark-soft);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+  }
+  .capacity-label.on-dark { fill: rgba(251, 247, 232, 0.7); }
+
+  /* ─── Confirmation modal ─────────────────────────────────── */
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(73, 66, 56, 0.55);
+    display: none;
+    place-items: center;
+    z-index: 100;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .modal.open {
+    display: grid;
+    opacity: 1;
+  }
+  .modal-card {
+    background: var(--cream);
+    border-radius: 8px;
+    max-width: 440px;
+    width: 100%;
+    padding: 2.5rem;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+  }
+  .modal.open .modal-card {
+    transform: translateY(0);
+  }
+  .modal-card .check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--sand);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 1.5rem;
+  }
+  .modal-card .check svg { width: 24px; height: 24px; }
+  .modal-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 1.8rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .modal-card h3 em { font-style: italic; color: var(--bark-soft); }
+  .modal-card .detail-list {
+    margin: 1.5rem 0;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--bark-faint);
+    border-bottom: 1px solid var(--bark-faint);
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    text-align: left;
+  }
+  .modal-card .detail-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .modal-card .detail-row .k {
+    color: var(--bark-soft);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-top: 3px;
+  }
+  .modal-card .detail-row .v {
+    color: var(--bark);
+    text-align: right;
+    font-weight: 500;
+  }
+  .modal-card .close-btn {
+    background: var(--bark);
+    color: var(--cream);
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.25s;
+  }
+  .modal-card .close-btn:hover { background: #2f2a23; }
+  .modal-card p.note {
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    color: var(--bark-soft);
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="wordmark">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M 38 14 Q 35 18, 38 22 Q 41 26, 38 30" stroke-width="1.8" opacity="0.55"/>
+      <path d="M 50 10 Q 47 14, 50 18 Q 53 22, 50 26" stroke-width="1.8" opacity="0.55"/>
+      <path d="M 62 14 Q 59 18, 62 22 Q 65 26, 62 30" stroke-width="1.8" opacity="0.55"/>
+      <path d="M 22 50 L 26 90 Q 26 94, 30 94 L 70 94 Q 74 94, 74 90 L 78 50 Z"/>
+      <path d="M 78 58 Q 90 58, 90 70 Q 90 82, 78 82"/>
+      <ellipse cx="50" cy="50" rx="28" ry="4"/>
+      <ellipse cx="50" cy="40" rx="14" ry="13" fill="#FBF7E8"/>
+      <path d="M 38 34 Q 32 38, 33 46 Q 35 50, 39 47" fill="#FBF7E8"/>
+      <path d="M 62 34 Q 68 38, 67 46 Q 65 50, 61 47" fill="#FBF7E8"/>
+      <circle cx="45" cy="39" r="1.8" fill="currentColor" stroke="none"/>
+      <circle cx="55" cy="39" r="1.8" fill="currentColor" stroke="none"/>
+      <ellipse cx="50" cy="45" rx="4" ry="3" fill="#FBF7E8"/>
+      <ellipse cx="50" cy="44" rx="1.6" ry="1.2" fill="currentColor" stroke="none"/>
+      <path d="M 50 46 L 50 47.5 M 50 47.5 Q 48 48.5, 47 47.5 M 50 47.5 Q 52 48.5, 53 47.5" stroke-width="1.5"/>
+    </svg>
+    Bow Wow<span>.</span>
+  </a>
+  <a href="index.html" class="back-link">← Home</a>
+</div>
+
+<div class="booking-hero">
+  <div class="eyebrow">— Reservations —</div>
+  <h1>Book a <em>table.</em></h1>
+  <p class="sub">Pick a date, time and party size, then choose your spot on the floor. Dogs welcome on leads. We hold tables for 15 minutes.</p>
+</div>
+
+<div class="booking-grid">
+
+  <!-- ─── Left: form ─────────────────────────────────── -->
+  <div class="form-panel">
+    <h2>Your details</h2>
+
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Full name" autocomplete="name">
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="date">Date</label>
+        <input type="date" id="date">
+      </div>
+      <div class="field">
+        <label for="time">Time</label>
+        <select id="time">
+          <option value="">Choose</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="party">Party size</label>
+      <select id="party">
+        <option value="1">1 person</option>
+        <option value="2" selected>2 people</option>
+        <option value="3">3 people</option>
+        <option value="4">4 people</option>
+        <option value="5">5 people</option>
+        <option value="6">6 people</option>
+        <option value="7">7 people</option>
+        <option value="8">8 people</option>
+      </select>
+    </div>
+
+    <div class="selection-summary" id="summary">
+      <span>Selected:</span>
+      <strong id="summary-text">no table yet</strong>
+    </div>
+
+    <button class="submit" id="submit" disabled>Confirm Booking →</button>
+  </div>
+
+  <!-- ─── Right: map ─────────────────────────────────── -->
+  <div class="map-panel">
+    <h2>Choose your spot <span class="hint">Tap to select</span></h2>
+
+    <div class="legend">
+      <span class="legend-item"><span class="legend-swatch available"></span>Available</span>
+      <span class="legend-item"><span class="legend-swatch selected"></span>Selected</span>
+      <span class="legend-item"><span class="legend-swatch unavail"></span>Too small for party</span>
+      <span class="legend-item"><span class="legend-swatch taken"></span>Already booked</span>
+    </div>
+
+    <div class="map-wrap">
+      <svg class="cafe-map" viewBox="0 0 600 740" xmlns="http://www.w3.org/2000/svg">
+
+        <defs>
+          <pattern id="hatchPattern" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(73, 66, 56, 0.35)" stroke-width="3"/>
+          </pattern>
+        </defs>
+
+        <!-- floor + walls -->
+        <rect class="floor" x="0" y="0" width="600" height="740"/>
+        <rect class="wall" x="2" y="2" width="596" height="736" rx="4"/>
+
+        <!-- Booths along top (3 booths, seats 4 each) -->
+        <g id="booths">
+          <g class="seat-group">
+            <rect class="seat" data-seat="booth-1" data-capacity="4" data-shape="rect" x="40"  y="40" width="140" height="100" rx="6"/>
+            <text class="seat-label" x="110" y="82">Booth 1</text>
+            <text class="capacity-label" x="110" y="100">seats 4</text>
+          </g>
+          <g class="seat-group">
+            <rect class="seat" data-seat="booth-2" data-capacity="4" data-shape="rect" x="200" y="40" width="140" height="100" rx="6"/>
+            <text class="seat-label" x="270" y="82">Booth 2</text>
+            <text class="capacity-label" x="270" y="100">seats 4</text>
+          </g>
+          <g class="seat-group">
+            <rect class="seat" data-seat="booth-3" data-capacity="4" data-shape="rect" x="360" y="40" width="140" height="100" rx="6"/>
+            <text class="seat-label" x="430" y="82">Booth 3</text>
+            <text class="capacity-label" x="430" y="100">seats 4</text>
+          </g>
+        </g>
+
+        <!-- Bar (right side, vertical, seats 6) -->
+        <g id="bar-group">
+          <rect class="bar-rect" x="500" y="180" width="30" height="500" rx="3"/>
+          <text class="bar-label" x="515" y="430" transform="rotate(90, 515, 430)">— THE BAR —</text>
+
+          <!-- 6 bar seats along the left edge of the bar -->
+          <g class="seat-group">
+            <circle class="seat" data-seat="bar-1" data-capacity="1" data-shape="circle" cx="475" cy="220" r="18"/>
+            <text class="seat-label" x="475" y="218">B1</text>
+            <text class="capacity-label" x="475" y="232">1</text>
+          </g>
+          <g class="seat-group">
+            <circle class="seat" data-seat="bar-2" data-capacity="1" data-shape="circle" cx="475" cy="290" r="18"/>
+            <text class="seat-label" x="475" y="288">B2</text>
+            <text class="capacity-label" x="475" y="302">1</text>
+          </g>
+          <g class="seat-group">
+            <circle class="seat" data-seat="bar-3" data-capacity="1" data-shape="circle" cx="475" cy="360" r="18"/>
+            <text class="seat-label" x="475" y="358">B3</text>
+            <text class="capacity-label" x="475" y="372">1</text>
+          </g>
+          <g class="seat-group">
+            <circle class="seat" data-seat="bar-4" data-capacity="1" data-shape="circle" cx="475" cy="430" r="18"/>
+            <text class="seat-label" x="475" y="428">B4</text>
+            <text class="capacity-label" x="475" y="442">1</text>
+          </g>
+          <g class="seat-group">
+            <circle class="seat" data-seat="bar-5" data-capacity="1" data-shape="circle" cx="475" cy="500" r="18"/>
+            <text class="seat-label" x="475" y="498">B5</text>
+            <text class="capacity-label" x="475" y="512">1</text>
+          </g>
+          <g class="seat-group">
+            <circle class="seat" data-seat="bar-6" data-capacity="1" data-shape="circle" cx="475" cy="570" r="18"/>
+            <text class="seat-label" x="475" y="568">B6</text>
+            <text class="capacity-label" x="475" y="582">1</text>
+          </g>
+        </g>
+
+        <!-- Round tables (6 total, 2 columns x 3 rows, seat 2 each) -->
+        <g id="tables">
+          <!-- Row 1 -->
+          <g class="seat-group">
+            <circle class="seat" data-seat="table-1" data-capacity="2" data-shape="circle" cx="120" cy="260" r="42"/>
+            <text class="seat-label" x="120" y="258">T1</text>
+            <text class="capacity-label" x="120" y="276">seats 2</text>
+          </g>
+          <g class="seat-group">
+            <circle class="seat" data-seat="table-2" data-capacity="2" data-shape="circle" cx="290" cy="260" r="42"/>
+            <text class="seat-label" x="290" y="258">T2</text>
+            <text class="capacity-label" x="290" y="276">seats 2</text>
+          </g>
+          <!-- Row 2 -->
+          <g class="seat-group">
+            <circle class="seat" data-seat="table-3" data-capacity="2" data-shape="circle" cx="120" cy="420" r="42"/>
+            <text class="seat-label" x="120" y="418">T3</text>
+            <text class="capacity-label" x="120" y="436">seats 2</text>
+          </g>
+          <g class="seat-group">
+            <circle class="seat" data-seat="table-4" data-capacity="2" data-shape="circle" cx="290" cy="420" r="42"/>
+            <text class="seat-label" x="290" y="418">T4</text>
+            <text class="capacity-label" x="290" y="436">seats 2</text>
+          </g>
+          <!-- Row 3 -->
+          <g class="seat-group">
+            <circle class="seat" data-seat="table-5" data-capacity="2" data-shape="circle" cx="120" cy="580" r="42"/>
+            <text class="seat-label" x="120" y="578">T5</text>
+            <text class="capacity-label" x="120" y="596">seats 2</text>
+          </g>
+          <g class="seat-group">
+            <circle class="seat" data-seat="table-6" data-capacity="2" data-shape="circle" cx="290" cy="580" r="42"/>
+            <text class="seat-label" x="290" y="578">T6</text>
+            <text class="capacity-label" x="290" y="596">seats 2</text>
+          </g>
+        </g>
+
+        <!-- Entrance hint -->
+        <g>
+          <line x1="240" y1="738" x2="360" y2="738" style="stroke: var(--cream); stroke-width: 6;"/>
+          <text x="300" y="725" text-anchor="middle" style="font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.2em; fill: var(--bark-soft); text-transform: uppercase;">Entrance</text>
+        </g>
+
+      </svg>
+    </div>
+  </div>
+
+</div>
+
+<!-- ─── Confirmation modal ───────────────────────────────── -->
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#494238" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12l5 5 9-11"/>
+      </svg>
+    </div>
+    <h3>Booking <em>confirmed.</em></h3>
+    <p class="note" id="modal-name">We'll see you soon.</p>
+    <div class="detail-list" id="modal-details"></div>
+    <button class="close-btn" onclick="document.getElementById('modal').classList.remove('open')">Done</button>
+    <p class="note">A confirmation email is on its way.</p>
+  </div>
+</div>
+
+<script>
+  // ─── State ─────────────────────────────────────────────
+  const state = {
+    selectedSeat: null,
+    party: 2,
+    // Simulated already-booked seats for realism
+    taken: new Set(['booth-2', 'table-4'])
+  };
+
+  // ─── Element refs ──────────────────────────────────────
+  const seats = document.querySelectorAll('.seat');
+  const partyInput = document.getElementById('party');
+  const summary = document.getElementById('summary');
+  const summaryText = document.getElementById('summary-text');
+  const submitBtn = document.getElementById('submit');
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const dateInput = document.getElementById('date');
+  const timeSelect = document.getElementById('time');
+  const modal = document.getElementById('modal');
+
+  // ─── Populate date (today min, default tomorrow) ──────
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  const fmt = d => d.toISOString().split('T')[0];
+  dateInput.min = fmt(today);
+  dateInput.value = fmt(tomorrow);
+
+  // ─── Populate time slots (15 min increments, 7am-3pm) ──
+  for (let h = 7; h < 15; h++) {
+    for (let m = 0; m < 60; m += 15) {
+      const t = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`;
+      const opt = document.createElement('option');
+      opt.value = t;
+      opt.textContent = `${((h + 11) % 12) + 1}:${m.toString().padStart(2,'0')} ${h < 12 ? 'AM' : 'PM'}`;
+      timeSelect.appendChild(opt);
+    }
+  }
+  timeSelect.value = '09:00';
+
+  // ─── Get nice label for a seat ─────────────────────────
+  function seatLabel(id) {
+    const map = {
+      'booth-1': 'Booth 1', 'booth-2': 'Booth 2', 'booth-3': 'Booth 3',
+      'table-1': 'Table 1', 'table-2': 'Table 2', 'table-3': 'Table 3',
+      'table-4': 'Table 4', 'table-5': 'Table 5', 'table-6': 'Table 6',
+      'bar-1': 'Bar seat 1', 'bar-2': 'Bar seat 2', 'bar-3': 'Bar seat 3',
+      'bar-4': 'Bar seat 4', 'bar-5': 'Bar seat 5', 'bar-6': 'Bar seat 6'
+    };
+    return map[id] || id;
+  }
+
+  // ─── Update seat availability based on party size ──────
+  function refreshSeats() {
+    seats.forEach(seat => {
+      const id = seat.dataset.seat;
+      const cap = parseInt(seat.dataset.capacity, 10);
+      const group = seat.parentNode;
+      const labels = group.querySelectorAll('text');
+
+      seat.classList.remove('disabled', 'taken', 'selected');
+      labels.forEach(l => l.classList.remove('on-dark', 'dim'));
+
+      if (state.taken.has(id)) {
+        seat.classList.add('taken');
+        labels.forEach(l => l.classList.add('dim'));
+        return;
+      }
+      if (cap < state.party) {
+        seat.classList.add('disabled');
+        labels.forEach(l => l.classList.add('dim'));
+        // If selected seat became invalid, clear it
+        if (state.selectedSeat === id) {
+          state.selectedSeat = null;
+        }
+        return;
+      }
+      if (state.selectedSeat === id) {
+        seat.classList.add('selected');
+        labels.forEach(l => l.classList.add('on-dark'));
+      }
+    });
+    updateSummary();
+  }
+
+  // ─── Update summary + submit state ─────────────────────
+  function updateSummary() {
+    if (state.selectedSeat) {
+      summary.classList.add('has-selection');
+      summaryText.textContent = `${seatLabel(state.selectedSeat)} · ${state.party} ${state.party === 1 ? 'person' : 'people'}`;
+    } else {
+      summary.classList.remove('has-selection');
+      summaryText.textContent = 'no table yet';
+    }
+    validateForm();
+  }
+
+  function validateForm() {
+    const valid = state.selectedSeat &&
+                  nameInput.value.trim().length > 1 &&
+                  emailInput.value.trim().includes('@') &&
+                  dateInput.value &&
+                  timeSelect.value;
+    submitBtn.disabled = !valid;
+  }
+
+  // ─── Wire up seat clicks ───────────────────────────────
+  seats.forEach(seat => {
+    seat.addEventListener('click', () => {
+      const id = seat.dataset.seat;
+      if (seat.classList.contains('disabled') || seat.classList.contains('taken')) return;
+      state.selectedSeat = state.selectedSeat === id ? null : id;
+      refreshSeats();
+    });
+  });
+
+  // ─── Wire up form changes ──────────────────────────────
+  partyInput.addEventListener('change', e => {
+    state.party = parseInt(e.target.value, 10);
+    refreshSeats();
+  });
+  [nameInput, emailInput, dateInput, timeSelect].forEach(el => {
+    el.addEventListener('input', validateForm);
+    el.addEventListener('change', validateForm);
+  });
+
+  // ─── Submit ─────────────────────────────────────────────
+  submitBtn.addEventListener('click', () => {
+    if (submitBtn.disabled) return;
+
+    const dateObj = new Date(dateInput.value);
+    const dateStr = dateObj.toLocaleDateString('en-AU', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    });
+    const timeStr = timeSelect.options[timeSelect.selectedIndex].textContent;
+
+    document.getElementById('modal-name').textContent = `Thanks ${nameInput.value.split(' ')[0]} — we can't wait to see you.`;
+    document.getElementById('modal-details').innerHTML = `
+      <div class="detail-row"><span class="k">When</span><span class="v">${dateStr}<br>${timeStr}</span></div>
+      <div class="detail-row"><span class="k">Party</span><span class="v">${state.party} ${state.party === 1 ? 'person' : 'people'}</span></div>
+      <div class="detail-row"><span class="k">Seating</span><span class="v">${seatLabel(state.selectedSeat)}</span></div>
+    `;
+    modal.classList.add('open');
+  });
+
+  modal.addEventListener('click', e => {
+    if (e.target === modal) modal.classList.remove('open');
+  });
+
+  // ─── Init ──────────────────────────────────────────────
+  state.party = parseInt(partyInput.value, 10);
+  refreshSeats();
+</script>
+
+</body>
+</html>

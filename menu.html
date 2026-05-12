@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — Bow Wow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cloud: #F6F8FB;
+    --cream: #FBF7E8;
+    --sand:  #E2D5B1;
+    --bark:  #494238;
+    --bark-soft: rgba(73, 66, 56, 0.6);
+    --bark-faint: rgba(73, 66, 56, 0.15);
+    --bark-fainter: rgba(73, 66, 56, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--bark);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  /* ─── Header ─────────────────────────────────────────────── */
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    z-index: 50;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--bark-faint);
+  }
+
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--bark);
+    font-variation-settings: "opsz" 144;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .wordmark svg {
+    width: 28px;
+    height: 28px;
+    color: var(--bark);
+    flex-shrink: 0;
+  }
+  .wordmark span { font-style: italic; font-weight: 300; }
+
+  .back-link {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--bark);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; }
+
+  .top-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+  .top-nav-link {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--bark);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .top-nav-link:hover { opacity: 1; }
+
+  @media (max-width: 720px) {
+    .topbar { padding: 1.25rem 1.5rem; }
+    .top-nav { gap: 1rem; }
+    .top-nav-link, .back-link { font-size: 0.7rem; letter-spacing: 0.12em; }
+  }
+
+  /* ─── Page hero ───────────────────────────────────────────── */
+
+  .menu-hero {
+    padding: 3.5rem 3rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .menu-hero .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bark-soft);
+    margin-bottom: 1rem;
+  }
+  .menu-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 144;
+  }
+  .menu-hero h1 em {
+    font-style: italic;
+    color: var(--bark-soft);
+  }
+  .menu-hero .sub {
+    margin-top: 0.9rem;
+    color: var(--bark-soft);
+    font-size: 0.85rem;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ─── Filter bar ───────────────────────────────────────────── */
+
+  .filters {
+    position: sticky;
+    top: 65px;
+    background: var(--cream);
+    z-index: 40;
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--bark-faint);
+    border-bottom: 1px solid var(--bark-faint);
+  }
+
+  .filters-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0.9rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .filters-inner::-webkit-scrollbar { display: none; }
+
+  .filters-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bark-soft);
+    margin-right: 0.6rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .chip {
+    background: transparent;
+    border: 1px solid var(--bark-faint);
+    color: var(--bark);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .chip:hover { border-color: var(--bark); }
+  .chip.active {
+    background: var(--bark);
+    color: var(--cream);
+    border-color: var(--bark);
+  }
+  .chip .x {
+    display: none;
+    font-size: 0.85em;
+    line-height: 1;
+    opacity: 0.7;
+  }
+  .chip.active:not([data-filter="all"]) .x {
+    display: inline;
+  }
+
+  @media (max-width: 720px) {
+    .filters-inner { padding: 1rem 1.5rem; }
+    .filters { top: 58px; }
+    .menu-hero { padding: 3.5rem 1.5rem 2rem; }
+  }
+
+  /* ─── Category nav ────────────────────────────────────────── */
+
+  .cat-nav {
+    max-width: 1100px;
+    margin: 1.25rem auto 0;
+    padding: 0 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .cat-nav a {
+    color: var(--bark-soft);
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  .cat-nav a:hover {
+    color: var(--bark);
+    border-color: var(--bark);
+  }
+
+  @media (max-width: 720px) {
+    .cat-nav { padding: 0 1.5rem; gap: 1rem; font-size: 0.7rem; }
+  }
+
+  /* ─── Menu sections ───────────────────────────────────────── */
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 3rem 5rem;
+  }
+
+  @media (max-width: 720px) {
+    main { padding: 2rem 1.5rem 3rem; }
+  }
+
+  .category {
+    margin-bottom: 3rem;
+    scroll-margin-top: 140px;
+  }
+  .category:last-child { margin-bottom: 0; }
+
+  .cat-head {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--bark);
+  }
+
+  .cat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 0.78rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--bark-soft);
+    letter-spacing: 0.05em;
+  }
+
+  .cat-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144;
+    margin: 0;
+  }
+  .cat-desc {
+    color: var(--bark-soft);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    margin-left: auto;
+  }
+
+  @media (max-width: 600px) {
+    .cat-desc { display: none; }
+  }
+
+  /* ─── Subsections ─────────────────────────────────────────── */
+
+  .subsection { margin-bottom: 1.75rem; }
+  .subsection:last-child { margin-bottom: 0; }
+
+  .sub-label {
+    font-family: inherit;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--bark-soft);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .items {
+    display: block;
+  }
+
+  /* ─── Item row ───────────────────────────────────────────── */
+
+  .item {
+    transition: opacity 0.35s ease;
+    padding: 0.6rem 0;
+    border-bottom: 1px dotted var(--bark-fainter);
+  }
+  .item:last-child { border-bottom: none; }
+  .item.hidden { display: none; }
+
+  .item-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 0.15rem;
+  }
+  .item-head h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 0.98rem;
+    letter-spacing: -0.01em;
+    font-variation-settings: "opsz" 144;
+    flex-shrink: 0;
+  }
+  .dots {
+    flex: 1;
+    border-bottom: 1px dotted var(--bark-faint);
+    margin-bottom: 5px;
+    min-width: 1rem;
+  }
+  .price {
+    font-family: 'Fraunces', serif;
+    font-size: 0.92rem;
+    font-weight: 400;
+    color: var(--bark);
+    font-variation-settings: "opsz" 144;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .price .currency {
+    font-style: italic;
+    color: var(--bark-soft);
+    margin-right: 1px;
+    font-size: 0.82em;
+  }
+
+  .desc {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--bark-soft);
+    max-width: 70ch;
+  }
+
+  .tags {
+    margin-top: 0.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .tag {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.12rem 0.45rem;
+    background: var(--sand);
+    color: var(--bark);
+    border-radius: 999px;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  /* ─── Footer ──────────────────────────────────────────────── */
+
+  footer.page-footer {
+    border-top: 1px solid var(--bark-faint);
+    padding: 3rem;
+    text-align: center;
+    color: var(--bark-soft);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+  }
+  footer.page-footer .wm {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.4rem;
+    color: var(--bark);
+    margin-bottom: 0.4rem;
+  }
+
+  /* ─── Scroll to top button ───────────────────────────────── */
+
+  .to-top {
+    position: fixed;
+    bottom: 1.75rem;
+    right: 1.75rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--bark);
+    color: var(--cream);
+    border: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    z-index: 60;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 6px 20px -8px rgba(73, 66, 56, 0.4);
+  }
+  .to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .to-top:hover {
+    background: #2f2a23;
+    transform: translateY(-2px);
+  }
+  .to-top svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 720px) {
+    .to-top { bottom: 1.25rem; right: 1.25rem; width: 40px; height: 40px; }
+    .to-top svg { width: 16px; height: 16px; }
+  }
+
+  /* ─── Empty state ─────────────────────────────────────────── */
+
+  .empty-state {
+    display: none;
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--bark-soft);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+  }
+  .empty-state.show { display: block; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="wordmark">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M 38 14 Q 35 18, 38 22 Q 41 26, 38 30" stroke-width="1.8" opacity="0.55"/>
+      <path d="M 50 10 Q 47 14, 50 18 Q 53 22, 50 26" stroke-width="1.8" opacity="0.55"/>
+      <path d="M 62 14 Q 59 18, 62 22 Q 65 26, 62 30" stroke-width="1.8" opacity="0.55"/>
+      <path d="M 22 50 L 26 90 Q 26 94, 30 94 L 70 94 Q 74 94, 74 90 L 78 50 Z"/>
+      <path d="M 78 58 Q 90 58, 90 70 Q 90 82, 78 82"/>
+      <ellipse cx="50" cy="50" rx="28" ry="4"/>
+      <ellipse cx="50" cy="40" rx="14" ry="13" fill="#FBF7E8"/>
+      <path d="M 38 34 Q 32 38, 33 46 Q 35 50, 39 47" fill="#FBF7E8"/>
+      <path d="M 62 34 Q 68 38, 67 46 Q 65 50, 61 47" fill="#FBF7E8"/>
+      <circle cx="45" cy="39" r="1.8" fill="currentColor" stroke="none"/>
+      <circle cx="55" cy="39" r="1.8" fill="currentColor" stroke="none"/>
+      <ellipse cx="50" cy="45" rx="4" ry="3" fill="#FBF7E8"/>
+      <ellipse cx="50" cy="44" rx="1.6" ry="1.2" fill="currentColor" stroke="none"/>
+      <path d="M 50 46 L 50 47.5 M 50 47.5 Q 48 48.5, 47 47.5 M 50 47.5 Q 52 48.5, 53 47.5" stroke-width="1.5"/>
+    </svg>
+    Bow Wow<span>.</span>
+  </a>
+  <div class="top-nav">
+    <a href="book.html" class="top-nav-link">Book a table</a>
+    <a href="index.html" class="back-link">← Home</a>
+  </div>
+</div>
+
+<div class="menu-hero">
+  <div class="eyebrow">— The Menu —</div>
+  <h1>What we're <em>serving.</em></h1>
+  <p class="sub">Breakfast until 11:30, lunch from 11, coffee and baked goods all day. Prices in AUD.</p>
+</div>
+
+<div class="cat-nav">
+        <a href="#breakfast">Breakfast</a>
+        <a href="#lunch">Lunch</a>
+        <a href="#snacks">Snacks</a>
+        <a href="#baked-goods">Baked Goods</a>
+        <a href="#coffee">Coffee</a>
+        <a href="#tea">Tea</a>
+        <a href="#drinks">Drinks</a>
+        <a href="#kids">Kids</a>
+</div>
+
+<div class="filters" id="filters">
+  <div class="filters-inner">
+    <span class="filters-label">Filter</span>
+    <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="Vegan">Vegan<span class="x">×</span></button>
+        <button class="chip" data-filter="Vegetarian">Vegetarian<span class="x">×</span></button>
+        <button class="chip" data-filter="Gluten Free">Gluten Free<span class="x">×</span></button>
+        <button class="chip" data-filter="Dairy Free">Dairy Free<span class="x">×</span></button>
+        <button class="chip" data-filter="Gluten Free Option">Gluten Free Option<span class="x">×</span></button>
+        <button class="chip" data-filter="Vegetarian Option">Vegetarian Option<span class="x">×</span></button>
+  </div>
+</div>
+
+<main>
+  
+      <section class="category" id="breakfast">
+        <header class="cat-head">
+          <div class="cat-num">01</div>
+          <div>
+            <h2>Breakfast</h2>
+            <p class="cat-desc">Served until 11:30am daily</p>
+          </div>
+        </header>
+        
+          <div class="subsection">
+            <h3 class="sub-label">Toasts</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Smashed Avocado on Sourdough</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>18.5</span>
+                </div>
+                <p class="desc">Smashed avocado, feta, cherry tomatoes, lemon and chilli flakes on toasted sourdough</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Mushroom Bruschetta</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>21</span>
+                </div>
+                <p class="desc">Sauteed mixed mushrooms, goats cheese, thyme and truffle oil on sourdough</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Hot Plates</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Big Breakfast</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>26</span>
+                </div>
+                <p class="desc">Eggs your way, bacon, chorizo, mushrooms, roasted tomato, hash brown, sourdough toast</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Eggs Benedict</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>22</span>
+                </div>
+                <p class="desc">Poached eggs, bacon or ham, hollandaise on toasted English muffin</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Eggs Florentine</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>20</span>
+                </div>
+                <p class="desc">Poached eggs, wilted spinach, hollandaise on toasted English muffin</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Vegan Breakfast Plate</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>22</span>
+                </div>
+                <p class="desc">Scrambled tofu, smashed avo, mushrooms, roasted tomato and sourdough</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Bowls</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Acai Bowl</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>17.5</span>
+                </div>
+                <p class="desc">Acai blend topped with granola, banana, strawberry, coconut and honey</p>
+                <div class="tags"><span class="tag">Vegetarian</span> <span class="tag">Gluten Free Option</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Bircher Muesli</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>14.5</span>
+                </div>
+                <p class="desc">Overnight oats with apple, cinnamon, yoghurt, seasonal fruit and honey</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Chia Pudding</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>14</span>
+                </div>
+                <p class="desc">Coconut chia pudding with mango, passionfruit and toasted coconut</p>
+                <div class="tags"><span class="tag">Vegan</span> <span class="tag">Gluten Free</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Sweet</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Buttermilk Pancakes</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>19.5</span>
+                </div>
+                <p class="desc">Stack of three with maple syrup, berries and whipped mascarpone</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>French Toast</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>19</span>
+                </div>
+                <p class="desc">Brioche French toast, cinnamon sugar, banana and salted caramel</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Handhelds</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Breakfast Burrito</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>16.5</span>
+                </div>
+                <p class="desc">Scrambled eggs, chorizo, black beans, cheese and salsa in a flour tortilla</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Bacon and Egg Roll</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>12.5</span>
+                </div>
+                <p class="desc">Bacon, fried egg, cheese, BBQ or tomato sauce on a milk bun</p>
+                
+              </article>
+            </div>
+          </div>
+      </section>
+      <section class="category" id="lunch">
+        <header class="cat-head">
+          <div class="cat-num">02</div>
+          <div>
+            <h2>Lunch</h2>
+            <p class="cat-desc">Available from 11:00am</p>
+          </div>
+        </header>
+        
+          <div class="subsection">
+            <h3 class="sub-label">Salads</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Chicken Caesar Salad</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>22</span>
+                </div>
+                <p class="desc">Cos lettuce, grilled chicken, bacon, parmesan, croutons, anchovy dressing</p>
+                
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Bowls</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Quinoa Power Bowl</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>21</span>
+                </div>
+                <p class="desc">Quinoa, roasted pumpkin, kale, beetroot, chickpeas, avocado, tahini dressing</p>
+                <div class="tags"><span class="tag">Vegan</span> <span class="tag">Gluten Free</span></div>
+              </article>
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Salmon Poke Bowl</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>23.5</span>
+                </div>
+                <p class="desc">Sushi rice, raw salmon, edamame, cucumber, avocado, pickled ginger, soy dressing</p>
+                <div class="tags"><span class="tag">Dairy Free</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Sandwiches</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Steak Sandwich</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>24.5</span>
+                </div>
+                <p class="desc">Scotch fillet, caramelised onion, rocket, tomato relish, aioli on Turkish bread</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Halloumi Wrap</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>17.5</span>
+                </div>
+                <p class="desc">Grilled halloumi, roasted capsicum, hummus, rocket, lemon in a wrap</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Reuben Sandwich</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>19.5</span>
+                </div>
+                <p class="desc">Pastrami, sauerkraut, Swiss cheese, Russian dressing on toasted rye</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Banh Mi</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>16.5</span>
+                </div>
+                <p class="desc">Pork pate, char siu pork, pickled veg, coriander, chilli, mayo on a baguette</p>
+                
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Soups</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Soup of the Day</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>14</span>
+                </div>
+                <p class="desc">Chefs daily soup served with crusty sourdough and cultured butter</p>
+                <div class="tags"><span class="tag">Vegetarian Option</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Burgers</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Beef Burger</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>23</span>
+                </div>
+                <p class="desc">Wagyu patty, cheese, lettuce, tomato, pickle, special sauce, brioche bun, served with fries</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Fried Chicken Burger</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>22</span>
+                </div>
+                <p class="desc">Buttermilk fried chicken, slaw, pickles, chipotle mayo on a milk bun, served with fries</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Plant-Based Burger</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>22</span>
+                </div>
+                <p class="desc">House made pattie, vegan cheese, lettuce, tomato, vegan aioli, served with fries</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Mains</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Pesto Pasta</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>21</span>
+                </div>
+                <p class="desc">Linguine with house basil pesto, roasted tomatoes, pine nuts and parmesan</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+            </div>
+          </div>
+      </section>
+      <section class="category" id="snacks">
+        <header class="cat-head">
+          <div class="cat-num">03</div>
+          <div>
+            <h2>Snacks</h2>
+            <p class="cat-desc">Sides and small plates all day</p>
+          </div>
+        </header>
+        
+          <div class="subsection">
+            <h3 class="sub-label">Sides</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Beer Battered Fries</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>9.5</span>
+                </div>
+                <p class="desc">Crispy fries with aioli and tomato sauce</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Sweet Potato Fries</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>11</span>
+                </div>
+                <p class="desc">Sweet potato fries with chipotle mayo</p>
+                <div class="tags"><span class="tag">Vegetarian</span> <span class="tag">Gluten Free</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Side Salad</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>8.5</span>
+                </div>
+                <p class="desc">Mixed leaves, cucumber, tomato, red onion, balsamic dressing</p>
+                <div class="tags"><span class="tag">Vegan</span> <span class="tag">Gluten Free</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Garlic Bread</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>8</span>
+                </div>
+                <p class="desc">Toasted sourdough with garlic butter and parsley</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Small Plates</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Chicken Wings</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>16.5</span>
+                </div>
+                <p class="desc">Buffalo or BBQ wings with blue cheese dipping sauce</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Loaded Nachos</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>18</span>
+                </div>
+                <p class="desc">Corn chips, beef chilli, cheese, jalapenos, guacamole and sour cream</p>
+                <div class="tags"><span class="tag">Gluten Free</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Bruschetta Plate</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>13.5</span>
+                </div>
+                <p class="desc">Tomato, basil and bocconcini on grilled sourdough</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+            </div>
+          </div>
+      </section>
+      <section class="category" id="baked-goods">
+        <header class="cat-head">
+          <div class="cat-num">04</div>
+          <div>
+            <h2>Baked Goods</h2>
+            <p class="cat-desc">Pastries, cakes and bread from our bakery</p>
+          </div>
+        </header>
+        
+          <div class="subsection">
+            <h3 class="sub-label">Pastries</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Almond Croissant</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>6.5</span>
+                </div>
+                <p class="desc">Buttery croissant filled with almond frangipane and dusted with icing sugar</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Plain Croissant</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>5.5</span>
+                </div>
+                <p class="desc">Classic flaky butter croissant</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Pain au Chocolat</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>6</span>
+                </div>
+                <p class="desc">Buttery pastry with two batons of dark chocolate</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Cakes</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Banana Bread</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>7.5</span>
+                </div>
+                <p class="desc">Toasted slice with butter or ricotta and honey</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Carrot Cake</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>8.5</span>
+                </div>
+                <p class="desc">Spiced carrot and walnut cake with cream cheese frosting</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Chocolate Brownie</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>7</span>
+                </div>
+                <p class="desc">Fudgy dark chocolate brownie with sea salt</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Lemon Tart</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>8.5</span>
+                </div>
+                <p class="desc">Lemon curd in a shortcrust shell with torched meringue</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Vegan Bliss Ball</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Date, cacao and coconut energy ball</p>
+                <div class="tags"><span class="tag">Vegan</span> <span class="tag">Gluten Free</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Bread</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Sourdough Loaf</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>9</span>
+                </div>
+                <p class="desc">Whole loaf of house baked sourdough</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+            </div>
+          </div>
+      </section>
+      <section class="category" id="coffee">
+        <header class="cat-head">
+          <div class="cat-num">05</div>
+          <div>
+            <h2>Coffee</h2>
+            <p class="cat-desc">House blend espresso and specialty coffee</p>
+          </div>
+        </header>
+        
+          <div class="subsection">
+            <h3 class="sub-label">Black</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Espresso</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4</span>
+                </div>
+                <p class="desc">Single shot of our house blend</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Double Espresso</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Double shot of our house blend</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Long Black</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Double shot poured over hot water</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Macchiato</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Espresso with a dash of milk foam</p>
+                
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Milk</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Cappuccino</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>5</span>
+                </div>
+                <p class="desc">Espresso with steamed milk and thick foam, chocolate dusting</p>
+                
+              </article>
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Flat White</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>5</span>
+                </div>
+                <p class="desc">Espresso with velvety steamed milk</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Latte</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>5</span>
+                </div>
+                <p class="desc">Espresso with steamed milk and light foam</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Mocha</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>5.5</span>
+                </div>
+                <p class="desc">Espresso, chocolate and steamed milk</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Piccolo</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Espresso topped with a small amount of steamed milk</p>
+                
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Cold</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Cold Brew</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>6</span>
+                </div>
+                <p class="desc">Slow steeped cold brew coffee over ice</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Iced Latte</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>6</span>
+                </div>
+                <p class="desc">Espresso, cold milk and ice</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Iced Long Black</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>5.5</span>
+                </div>
+                <p class="desc">Double shot poured over cold water and ice</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Dessert</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Affogato</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>8</span>
+                </div>
+                <p class="desc">Vanilla ice cream drowned in a shot of espresso</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+            </div>
+          </div>
+      </section>
+      <section class="category" id="tea">
+        <header class="cat-head">
+          <div class="cat-num">06</div>
+          <div>
+            <h2>Tea</h2>
+            <p class="cat-desc">Loose leaf and specialty teas</p>
+          </div>
+        </header>
+        
+          <div class="subsection">
+            <h3 class="sub-label">Black Tea</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>English Breakfast Tea</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Classic full bodied breakfast blend</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Earl Grey</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Black tea with bergamot oil</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Green Tea</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Green Tea</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Steamed Japanese sencha</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Jasmine Tea</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Fragrant jasmine scented green tea</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Herbal</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Peppermint Tea</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Pure peppermint leaf, caffeine free</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Chamomile Tea</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Soothing chamomile flowers, caffeine free</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Specialty</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Chai Latte</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>5.5</span>
+                </div>
+                <p class="desc">Spiced chai with steamed milk</p>
+                
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Dirty Chai</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>6.5</span>
+                </div>
+                <p class="desc">Chai latte with a shot of espresso</p>
+                
+              </article>
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Matcha Latte</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>6.5</span>
+                </div>
+                <p class="desc">Ceremonial grade matcha whisked with steamed milk</p>
+                
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Cold</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Iced Matcha</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>7</span>
+                </div>
+                <p class="desc">Matcha shaken with cold milk over ice</p>
+                
+              </article>
+            </div>
+          </div>
+      </section>
+      <section class="category" id="drinks">
+        <header class="cat-head">
+          <div class="cat-num">07</div>
+          <div>
+            <h2>Drinks</h2>
+            <p class="cat-desc">Juices, smoothies, cold drinks and bottled</p>
+          </div>
+        </header>
+        
+          <div class="subsection">
+            <h3 class="sub-label">Juice</h3>
+            <div class="items">
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Fresh Orange Juice</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>7.5</span>
+                </div>
+                <p class="desc">Freshly squeezed orange juice</p>
+                <div class="tags"><span class="tag">Vegan</span> <span class="tag">Gluten Free</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Green Juice</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>9.5</span>
+                </div>
+                <p class="desc">Apple, cucumber, celery, spinach, ginger and lemon</p>
+                <div class="tags"><span class="tag">Vegan</span> <span class="tag">Gluten Free</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Beet Boost Juice</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>9.5</span>
+                </div>
+                <p class="desc">Beetroot, carrot, apple, ginger and lemon</p>
+                <div class="tags"><span class="tag">Vegan</span> <span class="tag">Gluten Free</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Smoothies</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Mango Smoothie</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>9.5</span>
+                </div>
+                <p class="desc">Mango, banana, yoghurt, honey and milk</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item" data-featured="true">
+                <div class="item-head">
+                  <h3>Berry Smoothie</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>9.5</span>
+                </div>
+                <p class="desc">Mixed berries, banana, yoghurt and honey</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Acai Smoothie</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>10.5</span>
+                </div>
+                <p class="desc">Acai, banana, almond milk, peanut butter and dates</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Cold</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Iced Chocolate</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>8.5</span>
+                </div>
+                <p class="desc">Chocolate, cold milk, ice cream and whipped cream</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Milkshake (Choc / Vanilla / Strawberry / Caramel)</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>8.5</span>
+                </div>
+                <p class="desc">Classic thick milkshake in your choice of flavour</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Bottled</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Sparkling Water</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Still or sparkling water 500ml</p>
+                <div class="tags"><span class="tag">Vegan</span> <span class="tag">Gluten Free</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Kombucha</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>7</span>
+                </div>
+                <p class="desc">Locally brewed kombucha, rotating flavours</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Soft Drink</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>4.5</span>
+                </div>
+                <p class="desc">Coke, Coke No Sugar, Sprite, Lemon Squash</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Lemon, Lime and Bitters</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>5.5</span>
+                </div>
+                <p class="desc">Classic LLB on ice</p>
+                <div class="tags"><span class="tag">Vegan</span></div>
+              </article>
+            </div>
+          </div>
+      </section>
+      <section class="category" id="kids">
+        <header class="cat-head">
+          <div class="cat-num">08</div>
+          <div>
+            <h2>Kids</h2>
+            <p class="cat-desc">Smaller portions for the little ones</p>
+          </div>
+        </header>
+        
+          <div class="subsection">
+            <h3 class="sub-label">Mains</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Kids Pancakes</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>12</span>
+                </div>
+                <p class="desc">Two small pancakes with maple syrup and ice cream</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Kids Cheese Toastie</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>11</span>
+                </div>
+                <p class="desc">Grilled cheese sandwich with fries</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+              <article class="item">
+                <div class="item-head">
+                  <h3>Kids Chicken Nuggets</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>12</span>
+                </div>
+                <p class="desc">Crispy chicken nuggets with fries and tomato sauce</p>
+                
+              </article>
+            </div>
+          </div>
+          <div class="subsection">
+            <h3 class="sub-label">Drinks</h3>
+            <div class="items">
+              <article class="item">
+                <div class="item-head">
+                  <h3>Babyccino</h3>
+                  <span class="dots"></span>
+                  <span class="price"><span class="currency">$</span>2.5</span>
+                </div>
+                <p class="desc">Frothed milk with marshmallows and chocolate dusting</p>
+                <div class="tags"><span class="tag">Vegetarian</span></div>
+              </article>
+            </div>
+          </div>
+      </section>
+  <div class="empty-state" id="empty">No items match that filter — try another?</div>
+</main>
+
+<footer class="page-footer">
+  <div class="wm">Bow Wow.</div>
+  <p>142 Crown Street · Surry Hills NSW 2010 · (02) 9331 4280</p>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<script>
+  // Dietary filter — multi-select with AND logic
+  const chips = document.querySelectorAll('.chip');
+  const items = document.querySelectorAll('.item');
+  const categories = document.querySelectorAll('.category');
+  const subsections = document.querySelectorAll('.subsection');
+  const empty = document.getElementById('empty');
+  const allChip = document.querySelector('.chip[data-filter="all"]');
+
+  const activeFilters = new Set();
+
+  function applyFilters() {
+    let visibleCount = 0;
+    items.forEach(item => {
+      if (activeFilters.size === 0) {
+        item.classList.remove('hidden');
+        visibleCount++;
+        return;
+      }
+      const tags = Array.from(item.querySelectorAll('.tag')).map(t => t.textContent.trim());
+      // AND logic: every active filter must match at least one tag
+      const matchesAll = Array.from(activeFilters).every(f =>
+        tags.some(t => t === f || t.startsWith(f))
+      );
+      if (matchesAll) {
+        item.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+
+    // Hide subsections/categories with no visible items
+    subsections.forEach(sub => {
+      const visibleInSub = sub.querySelectorAll('.item:not(.hidden)').length;
+      sub.style.display = visibleInSub === 0 ? 'none' : '';
+    });
+    categories.forEach(cat => {
+      const visibleInCat = cat.querySelectorAll('.item:not(.hidden)').length;
+      cat.style.display = visibleInCat === 0 ? 'none' : '';
+    });
+
+    empty.classList.toggle('show', visibleCount === 0);
+
+    // Toggle "All" chip active state
+    allChip.classList.toggle('active', activeFilters.size === 0);
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const filter = chip.dataset.filter;
+      if (filter === 'all') {
+        activeFilters.clear();
+        chips.forEach(c => c.classList.remove('active'));
+      } else {
+        if (activeFilters.has(filter)) {
+          activeFilters.delete(filter);
+          chip.classList.remove('active');
+        } else {
+          activeFilters.add(filter);
+          chip.classList.add('active');
+        }
+      }
+      applyFilters();
+    });
+  });
+
+  // Smooth scroll for category nav
+  document.querySelectorAll('.cat-nav a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Scroll-to-top button — show after 300px scrolled
+  const toTop = document.getElementById('toTop');
+  const onScroll = () => {
+    toTop.classList.toggle('visible', window.scrollY > 300);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  toTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
